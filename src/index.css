@@ -125,13 +125,14 @@ All colors MUST be HSL.
     @apply bg-background text-foreground font-serif;
   }
   
-  /* Arabic text styling */
+  /* Arabic text styling with KFGQPC Uthmanic Script */
   .arabic {
-    font-family: 'Amiri', 'Times New Roman', serif;
+    font-family: 'KFGQPC-Uthmanic-Script-HAFS', 'Amiri', 'Times New Roman', serif;
     direction: rtl;
     text-align: right;
-    line-height: 2;
-    font-size: 1.25rem;
+    line-height: 2.2;
+    font-size: 1.4rem;
+    font-weight: normal;
   }
   
   /* Hadith content styling */
