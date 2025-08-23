@@ -65,7 +65,7 @@ export default {
 			},
 			fontFamily: {
 				'serif': ['Crimson Text', 'serif'],
-				'arabic': ['KFGQPC-Uthmanic-Script-HAFS', 'Amiri', 'Times New Roman', 'serif'],
+				'arabic': ['KFGQPC-Uthman-Taha-Naskh', 'Amiri', 'Times New Roman', 'serif'],
 			},
 			backgroundImage: {
 				'gradient-islamic': 'var(--gradient-islamic)',

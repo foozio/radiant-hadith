@@ -6,6 +6,16 @@
 All colors MUST be HSL.
 */
 
+/* KFGQPC Uthman Taha Naskh Font - Beautiful Naskh calligraphy for hadith text */
+@font-face {
+  font-family: 'KFGQPC-Uthman-Taha-Naskh';
+  src: url('./assets/fonts/KFGQPC-Uthman-Taha-Naskh.woff') format('woff'),
+       url('./assets/fonts/KFGQPC-Uthman-Taha-Naskh.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     /* Islamic color palette - Deep emerald greens and warm golds */
@@ -125,13 +135,13 @@ All colors MUST be HSL.
     @apply bg-background text-foreground font-serif;
   }
   
-  /* Arabic text styling with KFGQPC Uthmanic Script */
+  /* Arabic text styling with KFGQPC Uthman Taha Naskh */
   .arabic {
-    font-family: 'KFGQPC-Uthmanic-Script-HAFS', 'Amiri', 'Times New Roman', serif;
+    font-family: 'KFGQPC-Uthman-Taha-Naskh', 'Amiri', 'Times New Roman', serif;
     direction: rtl;
     text-align: right;
-    line-height: 2.2;
-    font-size: 1.4rem;
+    line-height: 2.4;
+    font-size: 1.5rem;
     font-weight: normal;
   }
   
