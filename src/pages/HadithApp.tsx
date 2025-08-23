@@ -99,7 +99,7 @@ export const HadithApp = () => {
               className="text-foreground hover:text-primary"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
+              Kembali
             </Button>
           </div>
         </header>
@@ -119,10 +119,10 @@ export const HadithApp = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  Hadith Collections
+                  Koleksi Hadits
                 </h2>
                 <p className="text-xl text-muted-foreground">
-                  Explore authentic hadith from renowned scholars
+                  Jelajahi hadits autentik dari ulama terkemuka
                 </p>
               </div>
 
@@ -206,7 +206,7 @@ export const HadithApp = () => {
             {' '}oleh Sutan Gading Fadhillah Nasution
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            Built with love for the Muslim community
+            Dibangun oleh Nuzli L. Hernawan untuk Komunitas Muslim
           </p>
         </div>
       </footer>
