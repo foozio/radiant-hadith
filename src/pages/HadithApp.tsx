@@ -194,7 +194,7 @@ export const HadithApp = () => {
       <footer className="bg-muted/30 border-t border-border/50 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <p className="text-muted-foreground">
-            Hadith data provided by{' '}
+            Data Hadith dari{' '}
             <a
               href="https://github.com/gadingnst/hadith-api"
               target="_blank"
@@ -203,7 +203,7 @@ export const HadithApp = () => {
             >
               Hadith API
             </a>
-            {' '}by Sutan Gading Fadhillah Nasution
+            {' '}oleh Sutan Gading Fadhillah Nasution
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             Built with love for the Muslim community
