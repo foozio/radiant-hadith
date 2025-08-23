@@ -99,6 +99,7 @@ All colors MUST be HSL.
   }
 }
 
+@layer base {
   /* Custom design tokens for Islamic app */
   :root {
     /* Gradients */
@@ -114,7 +115,6 @@ All colors MUST be HSL.
     /* Typography */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-}
 
 @layer base {
   * {
