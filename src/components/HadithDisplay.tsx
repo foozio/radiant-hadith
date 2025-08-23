@@ -29,8 +29,8 @@ export const HadithDisplay = ({ hadith, onClose }: HadithDisplayProps) => {
     const text = `${hadith.contents.arab}\n\n${hadith.contents.id}\n\n- ${hadith.name} #${hadith.contents.number}`;
     await navigator.clipboard.writeText(text);
     toast({
-      title: "Hadith copied",
-      description: "The hadith has been copied to your clipboard.",
+      title: "Hadits disalin",
+      description: "Hadits telah disalin ke clipboard Anda.",
     });
   };
 
@@ -59,7 +59,7 @@ export const HadithDisplay = ({ hadith, onClose }: HadithDisplayProps) => {
               </h3>
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary" className="bg-secondary/80">
-                  Hadith #{hadith.contents.number}
+                  Hadits #{hadith.contents.number}
                 </Badge>
               </div>
             </div>
@@ -114,10 +114,10 @@ export const HadithDisplay = ({ hadith, onClose }: HadithDisplayProps) => {
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <div>
               <span className="font-medium">{hadith.name}</span> • 
-              <span className="ml-1">Hadith #{hadith.contents.number}</span>
+              <span className="ml-1">Hadits #{hadith.contents.number}</span>
             </div>
             <div className="text-xs">
-              Source: api.hadith.gading.dev
+              Sumber: api.hadith.gading.dev
             </div>
           </div>
         </div>

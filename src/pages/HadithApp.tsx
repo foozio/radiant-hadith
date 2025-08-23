@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { HadithHero } from "@/components/HadithHero";
 import { HadithBook } from "@/components/HadithBook";
 import { HadithDisplay } from "@/components/HadithDisplay";
+import { SearchResults } from "@/components/SearchResults";
 import { useHadithBooks, useHadith } from "@/hooks/useHadithAPI";
+import { useHadithSearch } from "@/hooks/useHadithSearch";
 import { useToast } from "@/hooks/use-toast";
 
 type ViewMode = 'home' | 'books' | 'hadith' | 'search';
@@ -24,9 +26,12 @@ export const HadithApp = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('home');
   const [selectedHadith, setSelectedHadith] = useState<HadithData | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedBook, setSelectedBook] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   
   const { books, loading: booksLoading, error: booksError } = useHadithBooks();
   const { fetchHadith, loading: hadithLoading, error: hadithError } = useHadith();
+  const { searchState, searchHadith, clearSearch, getPaginatedResults } = useHadithSearch();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -49,14 +54,13 @@ export const HadithApp = () => {
     }
   }, [hadithError, toast]);
 
-  const handleSearch = (query: string) => {
+  const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setViewMode('search');
-    // For now, just show a message since the API doesn't have search endpoint
-    toast({
-      title: "Search feature",
-      description: "Search functionality will be available in a future update. Please browse collections for now.",
-    });
+    setCurrentPage(1);
+    
+    // Perform the actual search
+    await searchHadith(query, books, selectedBook);
   };
 
   const handleBrowseBooks = () => {
@@ -158,29 +162,30 @@ export const HadithApp = () => {
         )}
 
         {viewMode === 'search' && (
-          <section className="py-12 px-6">
-            <div className="max-w-7xl mx-auto text-center">
-              <div className="max-w-2xl mx-auto">
-                <h2 className="text-3xl font-bold text-foreground mb-4">
-                  Search Results
-                </h2>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Searching for: "{searchQuery}"
-                </p>
-                <div className="bg-card/50 rounded-xl p-8 border border-border/50">
-                  <p className="text-muted-foreground">
-                    The search functionality is not available in the current API.
-                    Please browse through the collections to find specific hadiths.
-                  </p>
-                  <Button
-                    onClick={handleBrowseBooks}
-                    className="mt-4"
-                  >
-                    Browse Collections
-                  </Button>
-                </div>
-              </div>
-            </div>
+          <section className="py-12">
+            <SearchResults
+              searchQuery={searchQuery}
+              searchResults={searchState.results}
+              loading={searchState.loading}
+              error={searchState.error}
+              books={books}
+              selectedBook={selectedBook}
+              currentPage={currentPage}
+              totalPages={Math.ceil(searchState.results.length / 10)}
+              onSearch={handleSearch}
+              onFilterByBook={(bookId) => {
+                setSelectedBook(bookId);
+                setCurrentPage(1);
+                if (searchQuery) {
+                  searchHadith(searchQuery, books, bookId);
+                }
+              }}
+              onPageChange={(page) => setCurrentPage(page)}
+              onSelectHadith={(hadith) => {
+                setSelectedHadith(hadith);
+                setViewMode('hadith');
+              }}
+            />
           </section>
         )}
       </main>

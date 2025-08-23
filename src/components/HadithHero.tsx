@@ -29,10 +29,10 @@ export const HadithHero = ({ onSearch, onBrowseBooks }: HadithHeroProps) => {
         {/* Main heading */}
         <div className="mb-8">
           <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-4 leading-tight">
-            Hadith Explorer
+            Penjelajah Hadits
           </h1>
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-2 font-light">
-            Discover the beautiful teachings of Prophet Muhammad ﷺ
+            Temukan ajaran indah Nabi Muhammad ﷺ
           </p>
           <p className="text-lg text-primary-foreground/80 font-arabic">
             استكشف الأحاديث النبوية الشريفة
@@ -46,7 +46,7 @@ export const HadithHero = ({ onSearch, onBrowseBooks }: HadithHeroProps) => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
               <Input
                 type="text"
-                placeholder="Search for hadith, keywords, or topics..."
+                placeholder="Cari hadits, kata kunci, atau topik..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 pr-24 h-14 text-lg bg-card/95 backdrop-blur-sm border-primary/20 shadow-islamic focus:shadow-gold transition-all duration-300"
@@ -55,7 +55,7 @@ export const HadithHero = ({ onSearch, onBrowseBooks }: HadithHeroProps) => {
                 type="submit"
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 h-10 px-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-soft"
               >
-                Search
+                Cari
               </Button>
             </div>
           </div>
@@ -70,11 +70,11 @@ export const HadithHero = ({ onSearch, onBrowseBooks }: HadithHeroProps) => {
             className="bg-secondary/90 hover:bg-secondary text-secondary-foreground shadow-gold min-w-[200px] h-12"
           >
             <BookOpen className="mr-2 h-5 w-5" />
-            Browse Collections
+            Jelajahi Koleksi
           </Button>
           
           <div className="text-primary-foreground/70 text-sm">
-            9 authentic hadith collections available
+            9 koleksi hadits sahih tersedia
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export const HadithBook = ({ book, onSelect }: HadithBookProps) => {
                 {book.name}
               </CardTitle>
               <p className="text-sm text-muted-foreground">
-                Authentic Collection
+                Koleksi Sahih
               </p>
             </div>
           </div>
@@ -39,7 +39,7 @@ export const HadithBook = ({ book, onSelect }: HadithBookProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 text-muted-foreground">
             <Clock className="h-4 w-4" />
-            <span className="text-sm">{book.available.toLocaleString()} hadiths</span>
+            <span className="text-sm">{book.available.toLocaleString()} hadits</span>
           </div>
           
           <Button 
@@ -51,7 +51,7 @@ export const HadithBook = ({ book, onSelect }: HadithBookProps) => {
               onSelect(book.id);
             }}
           >
-            Explore
+            Jelajahi
           </Button>
         </div>
         

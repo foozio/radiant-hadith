@@ -43,7 +43,7 @@ export const useHadithBooks = () => {
         
         setBooks(data.data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch books');
+        setError(err instanceof Error ? err.message : 'Gagal mengambil daftar kitab');
       } finally {
         setLoading(false);
       }
@@ -73,7 +73,7 @@ export const useHadith = () => {
       
       return data.data;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch hadith';
+      const errorMessage = err instanceof Error ? err.message : 'Gagal mengambil hadits';
       setError(errorMessage);
       return null;
     } finally {
@@ -95,7 +95,7 @@ export const useHadith = () => {
       
       return data.data.hadiths || [];
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch hadith range';
+      const errorMessage = err instanceof Error ? err.message : 'Gagal mengambil rentang hadits';
       setError(errorMessage);
       return null;
     } finally {
