@@ -51,14 +51,42 @@ export const useHadithSearch = () => {
 
   // Function to check if text matches query
   const matchesQuery = useCallback((text: string, query: string): boolean => {
+    if (!text || !query) return false;
+    
     const normalizedText = normalizeText(text);
     const normalizedQuery = normalizeText(query);
+    
+    // Debug logging for "niat" search
+    if (query.toLowerCase().includes('niat')) {
+      console.log('🔍 Debug search for "niat":');
+      console.log('  Original text:', text.substring(0, 100) + '...');
+      console.log('  Normalized text:', normalizedText.substring(0, 100) + '...');
+      console.log('  Query:', query);
+      console.log('  Normalized query:', normalizedQuery);
+    }
     
     // Split query into words for better matching
     const queryWords = normalizedQuery.split(' ').filter(word => word.length > 0);
     
     // Check if all query words are found in the text
-    return queryWords.every(word => normalizedText.includes(word));
+    const matches = queryWords.every(word => {
+      const found = normalizedText.includes(word);
+      if (query.toLowerCase().includes('niat') && word === 'niat') {
+        console.log(`  Checking word "${word}" in text: ${found}`);
+        if (found) {
+          const index = normalizedText.indexOf(word);
+          console.log(`  Found "${word}" at position ${index}`);
+          console.log(`  Context: "${normalizedText.substring(Math.max(0, index-20), index+20)}"`);
+        }
+      }
+      return found;
+    });
+    
+    if (query.toLowerCase().includes('niat')) {
+      console.log('  Final match result:', matches);
+    }
+    
+    return matches;
   }, [normalizeText]);
 
   // Function to fetch hadith from a specific book
@@ -79,16 +107,23 @@ export const useHadithSearch = () => {
       const end = Math.min(start + BATCH_SIZE - 1, maxHadith);
       
       try {
+        console.log(`📖 Fetching hadith ${start}-${end} from ${book.id}`);
         const hadithBatch = await fetchHadithRange(book.id, start, end);
+        console.log(`📖 Received ${hadithBatch?.length || 0} hadith from API`);
         
         if (hadithBatch) {
           // Filter hadith that match the query
           const matchingHadith = hadithBatch.filter(hadith => {
             const arabicMatch = matchesQuery(hadith.contents.arab, query);
             const translationMatch = hadith.contents.id ? matchesQuery(hadith.contents.id, query) : false;
-            return arabicMatch || translationMatch;
+            const matches = arabicMatch || translationMatch;
+            if (matches) {
+              console.log(`✨ Found match in hadith #${hadith.contents.number}`);
+            }
+            return matches;
           });
           
+          console.log(`🎯 ${matchingHadith.length} hadith matched query in batch ${start}-${end}`);
           results.push(...matchingHadith);
         }
         
@@ -109,6 +144,8 @@ export const useHadithSearch = () => {
     books: HadithBook[],
     selectedBookId?: string | null
   ) => {
+    console.log('🔍 Starting search with query:', query, 'books:', books.length, 'selectedBook:', selectedBookId);
+    
     if (!query.trim()) {
       setSearchState({
         results: [],
@@ -135,6 +172,8 @@ export const useHadithSearch = () => {
         ? books.filter(book => book.id === selectedBookId)
         : books;
 
+      console.log('📚 Books to search:', booksToSearch.map(b => b.name));
+
       if (booksToSearch.length === 0) {
         throw new Error('No books available for search');
       }
@@ -146,13 +185,15 @@ export const useHadithSearch = () => {
         if (abortController.signal.aborted) break;
         
         try {
+          console.log(`🔍 Searching in ${book.name}...`);
           const bookResults = await fetchHadithFromBook(book, query, abortController.signal);
+          console.log(`✅ Found ${bookResults.length} results in ${book.name}`);
           allResults.push(...bookResults);
         } catch (error) {
           if (error instanceof Error && error.message === 'Search cancelled') {
             break;
           }
-          console.warn(`Failed to search in ${book.name}:`, error);
+          console.warn(`❌ Failed to search in ${book.name}:`, error);
           // Continue with other books
         }
       }
@@ -165,6 +206,8 @@ export const useHadithSearch = () => {
         return a.contents.number - b.contents.number;
       });
 
+      console.log('🎉 Search completed! Total results:', allResults.length);
+      
       setSearchState({
         results: allResults,
         loading: false,

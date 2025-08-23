@@ -17,6 +17,19 @@ interface HadithData {
   };
 }
 
+interface HadithContent {
+  number: number;
+  arab: string;
+  id: string;
+}
+
+interface HadithRangeResponse {
+  name: string;
+  id: string;
+  available: number;
+  contents: HadithContent[];
+}
+
 interface APIResponse<T> {
   code: number;
   message: string;
@@ -87,15 +100,57 @@ export const useHadith = () => {
     
     try {
       const response = await fetch(`${BASE_URL}/books/${bookId}?range=${start}-${end}`);
-      const data: APIResponse<{ hadiths: HadithData[] }> = await response.json();
       
-      if (data.error) {
-        throw new Error(data.message);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      return data.data.hadiths || [];
+      const data = await response.json();
+      console.log('📡 API Response for range:', data);
+      
+      // Check if API returned an error
+      if (data.error) {
+        throw new Error(data.message || 'API returned an error');
+      }
+      
+      // The correct structure: data.data.hadiths
+      if (data.data && data.data.hadiths && Array.isArray(data.data.hadiths)) {
+        const hadithArray: HadithData[] = data.data.hadiths.map((hadith: HadithContent) => ({
+          name: data.data.name,
+          id: data.data.id,
+          available: data.data.available,
+          contents: hadith
+        }));
+        console.log(`📖 Parsed ${hadithArray.length} hadith from API response`);
+        return hadithArray;
+      }
+      
+      // Fallback: API returns array directly for range queries
+      if (Array.isArray(data)) {
+        return data as HadithData[];
+      }
+      
+      // Fallback: if it's wrapped in data property as array
+      if (data.data && Array.isArray(data.data)) {
+        return data.data as HadithData[];
+      }
+      
+      // Legacy fallback: if it has contents property
+      if (data.contents && Array.isArray(data.contents)) {
+        const hadithArray: HadithData[] = data.contents.map((content: HadithContent) => ({
+          name: data.name,
+          id: data.id,
+          available: data.available,
+          contents: content
+        }));
+        return hadithArray;
+      }
+      
+      console.warn('Unexpected API response format:', data);
+      return [];
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Gagal mengambil rentang hadits';
+      console.error('fetchHadithRange error:', err);
       setError(errorMessage);
       return null;
     } finally {
