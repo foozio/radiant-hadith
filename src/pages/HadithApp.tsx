@@ -191,13 +191,14 @@ export const HadithApp = () => {
           <p className="text-muted-foreground">
             Hadith data provided by{' '}
             <a
-              href="https://api.hadith.gading.dev/"
+              href="https://github.com/gadingnst/hadith-api"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-primary/80 transition-colors"
             >
-              api.hadith.gading.dev
+              Hadith API
             </a>
+            {' '}by Sutan Gading Fadhillah Nasution
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             Built with love for the Muslim community
