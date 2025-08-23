@@ -2,39 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Islamic Hadith App Design System - Inspired by traditional Islamic manuscripts
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Islamic color palette - Deep emerald greens and warm golds */
+    --background: 30 15% 97%;
+    --foreground: 155 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 30 20% 98%;
+    --card-foreground: 155 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 30 20% 98%;
+    --popover-foreground: 155 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Islamic emerald */
+    --primary: 155 60% 25%;
+    --primary-foreground: 30 20% 98%;
+    
+    /* Golden accents */
+    --secondary: 45 85% 88%;
+    --secondary-foreground: 155 60% 25%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 30 15% 94%;
+    --muted-foreground: 155 15% 45%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Warm gold accent */
+    --accent: 45 90% 85%;
+    --accent-foreground: 155 60% 25%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 30 20% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 20% 90%;
+    --input: 30 20% 96%;
+    --ring: 155 60% 25%;
 
     --radius: 0.5rem;
 
@@ -56,33 +60,34 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode - Deep islamic greens with warm undertones */
+    --background: 155 30% 8%;
+    --foreground: 30 20% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 155 25% 10%;
+    --card-foreground: 30 20% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 155 25% 10%;
+    --popover-foreground: 30 20% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 45 80% 65%;
+    --primary-foreground: 155 30% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 155 15% 15%;
+    --secondary-foreground: 30 20% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 155 15% 12%;
+    --muted-foreground: 30 10% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 155 15% 15%;
+    --accent-foreground: 45 80% 65%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 30 20% 95%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 155 15% 18%;
+    --input: 155 15% 12%;
+    --ring: 45 80% 65%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -94,12 +99,44 @@ All colors MUST be HSL.
   }
 }
 
+  /* Custom design tokens for Islamic app */
+  :root {
+    /* Gradients */
+    --gradient-islamic: linear-gradient(135deg, hsl(var(--primary)), hsl(155 45% 35%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 90% 75%), hsl(45 85% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(155 45% 35%), hsl(45 60% 45%));
+    
+    /* Shadows */
+    --shadow-islamic: 0 8px 32px -4px hsl(var(--primary) / 0.2);
+    --shadow-gold: 0 4px 20px -2px hsl(45 70% 50% / 0.3);
+    --shadow-soft: 0 2px 8px -1px hsl(var(--foreground) / 0.1);
+    
+    /* Typography */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-serif;
+  }
+  
+  /* Arabic text styling */
+  .arabic {
+    font-family: 'Amiri', 'Times New Roman', serif;
+    direction: rtl;
+    text-align: right;
+    line-height: 2;
+    font-size: 1.25rem;
+  }
+  
+  /* Hadith content styling */
+  .hadith-text {
+    line-height: 1.8;
+    font-size: 1.1rem;
   }
 }

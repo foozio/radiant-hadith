@@ -63,6 +63,20 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			fontFamily: {
+				'serif': ['Crimson Text', 'serif'],
+				'arabic': ['Amiri', 'Times New Roman', 'serif'],
+			},
+			backgroundImage: {
+				'gradient-islamic': 'var(--gradient-islamic)',
+				'gradient-gold': 'var(--gradient-gold)', 
+				'gradient-hero': 'var(--gradient-hero)',
+			},
+			boxShadow: {
+				'islamic': 'var(--shadow-islamic)',
+				'gold': 'var(--shadow-gold)',
+				'soft': 'var(--shadow-soft)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
