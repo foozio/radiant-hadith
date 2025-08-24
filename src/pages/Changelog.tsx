@@ -16,6 +16,21 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: "1.3.3",
+    date: new Date().toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+    changes: {
+      added: [
+        "Favicon baru dengan desain menarik yang mencerminkan tema Islam",
+        "Ikon aplikasi dengan kombinasi huruf Arab 'ج' (Jim untuk Jelajah) dan elemen buku",
+        "Desain favicon dalam format SVG dengan gradien warna hijau dan emas"
+      ]
+    }
+  },
+  {
     version: "1.3.2",
     date: new Date().toLocaleDateString('id-ID', {
       year: 'numeric',
