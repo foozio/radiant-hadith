@@ -16,6 +16,24 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: "1.3.1",
+    date: new Date().toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+    changes: {
+      added: [
+        "File _redirects untuk mendukung client-side routing di Netlify",
+        "Link LinkedIn untuk Sutan Gading Fadhillah Nasution di footer"
+      ],
+      fixed: [
+        "Memperbaiki error 404 saat mengakses halaman changelog di deployment Netlify",
+        "Mengatasi masalah routing untuk single-page application di hosting statis"
+      ]
+    }
+  },
+  {
     version: "1.3.0",
     date: new Date().toLocaleDateString('id-ID', {
       year: 'numeric',
