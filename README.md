@@ -71,8 +71,8 @@ Aplikasi ini di-deploy menggunakan Netlify dengan konfigurasi:
 
 ## 🤝 Kontributor
 
-- **Developer**: [Your Name]
-- **Hadith API**: [Sutan Gading Fadhillah Nasution](https://github.com/sutanlab)
+- **Developer**: [Nuzli L. Hernawan](https://github.com/foozio)
+- **Hadith API**: [Sutan Gading Fadhillah Nasution](https://github.com/gadingnst)
 
 ## 📄 Lisensi
 
