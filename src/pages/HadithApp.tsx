@@ -193,20 +193,45 @@ export const HadithApp = () => {
       {/* Footer */}
       <footer className="bg-muted/30 border-t border-border/50 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="mb-4">
+            <a
+              href="/changelog"
+              className="text-primary hover:text-primary/80 transition-colors text-sm font-medium"
+            >
+              Changelog
+            </a>
+          </div>
           <p className="text-muted-foreground">
-            Data Hadith dari{' '}
+            Data koleksi hadits diambil dari{' '}
             <a
               href="https://github.com/gadingnst/hadith-api"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-primary/80 transition-colors"
             >
-              Hadith API
+              API Hadits
             </a>
-            {' '}oleh Sutan Gading Fadhillah Nasution
+            {' '}oleh{' '}
+            <a
+              href="https://www.linkedin.com/in/gadingnst/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 transition-colors"
+            >
+              Sutan Gading Fadhillah Nasution
+            </a>
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            Dibangun oleh Nuzli L. Hernawan untuk Komunitas Muslim
+            Dibangun oleh{' '}
+            <a
+              href="https://www.linkedin.com/in/nuzlilatief"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 transition-colors"
+            >
+              Nuzli L. Hernawan
+            </a>
+            {' '}untuk Komunitas Muslim Indonesia
           </p>
         </div>
       </footer>

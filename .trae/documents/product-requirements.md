@@ -1,7 +1,7 @@
-# Radiant Hadith - Product Requirements Document
+# Jelajah Hadits - Product Requirements Document
 
 ## 1. Product Overview
-Radiant Hadith is a modern web application that provides users with easy access to authentic Islamic hadith collections from renowned scholars. The application offers a beautiful, user-friendly interface for exploring, reading, and sharing hadith texts in both Arabic and English.
+Jelajah Hadits is a modern web application that provides users with easy access to authentic Islamic hadith collections from renowned scholars. The application offers a beautiful, user-friendly interface for exploring, reading, and sharing hadith texts in both Arabic and English.
 
 The product serves Muslims and Islamic scholars who need quick access to verified hadith collections for study, reference, and spiritual guidance. It bridges traditional Islamic scholarship with modern web technology to make hadith more accessible to a global audience.
 

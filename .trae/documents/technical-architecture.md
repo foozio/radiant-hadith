@@ -1,4 +1,4 @@
-# Radiant Hadith - Technical Architecture Document
+# Jelajah Hadits - Technical Architecture Document
 
 ## 1. Architecture Design
 
