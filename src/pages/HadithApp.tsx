@@ -30,7 +30,7 @@ export const HadithApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   
   const { books, loading: booksLoading, error: booksError } = useHadithBooks();
-  const { fetchHadith, loading: hadithLoading, error: hadithError } = useHadith();
+  const { fetchHadith, fetchHadithWithRetry, loading: hadithLoading, error: hadithError } = useHadith();
   const { searchState, searchHadith, clearSearch, getPaginatedResults } = useHadithSearch();
   const { toast } = useToast();
 
@@ -68,14 +68,14 @@ export const HadithApp = () => {
   };
 
   const handleSelectBook = async (bookId: string) => {
-    // Fetch a random hadith from the selected book for demonstration
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-    const hadith = await fetchHadith(bookId, randomNumber);
+    // Use retry mechanism to find a working hadith
+    const hadith = await fetchHadithWithRetry(bookId, 10);
     
     if (hadith) {
       setSelectedHadith(hadith);
       setViewMode('hadith');
     }
+    // Error handling is already done in the hook
   };
 
   const handleBack = () => {
@@ -152,7 +152,7 @@ export const HadithApp = () => {
               {hadithLoading ? (
                 <div className="flex justify-center items-center py-12">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <span className="ml-2 text-lg text-muted-foreground">Loading hadith...</span>
+                  <span className="ml-2 text-lg text-muted-foreground">Mencari hadith yang tersedia...</span>
                 </div>
               ) : (
                 <HadithDisplay hadith={selectedHadith} />

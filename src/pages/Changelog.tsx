@@ -16,6 +16,22 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: "1.3.2",
+    date: new Date().toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+    changes: {
+      fixed: [
+        "Memperbaiki error 400 pada retry mechanism hadith loading",
+        "Meningkatkan stabilitas pencarian hadith otomatis",
+        "Memperbaiki endpoint API untuk informasi koleksi hadith",
+        "Menambahkan validasi data yang lebih robust pada fetchHadithWithRetry"
+      ]
+    }
+  },
+  {
     version: "1.3.1",
     date: new Date().toLocaleDateString('id-ID', {
       year: 'numeric',
