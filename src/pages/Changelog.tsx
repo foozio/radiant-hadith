@@ -16,6 +16,23 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: "1.3.4",
+    date: new Date().toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+    changes: {
+      changed: [
+        "Mengganti konten README dengan deskripsi yang sesuai untuk Jelajah Hadits",
+        "Menambahkan dokumentasi fitur utama aplikasi",
+        "Menyertakan panduan instalasi dan development",
+        "Menambahkan informasi teknologi dan deployment",
+        "Credit untuk developer dan API provider"
+      ]
+    }
+  },
+  {
     version: "1.3.3",
     date: new Date().toLocaleDateString('id-ID', {
       year: 'numeric',

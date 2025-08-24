@@ -1,73 +1,93 @@
-# Welcome to your Lovable project
+# Jelajah Hadits
 
-## Project info
+Aplikasi web modern untuk menjelajahi koleksi hadits autentik dari berbagai kitab hadits terpercaya. Dibangun dengan teknologi terkini untuk memberikan pengalaman pencarian dan pembelajaran hadits yang mudah dan nyaman.
 
-**URL**: https://lovable.dev/projects/cecbe778-5819-4631-8fad-1b7477e9e2a9
+## ✨ Fitur Utama
 
-## How can I edit this code?
+- 🔍 **Pencarian Hadits**: Cari hadits dengan kata kunci dalam bahasa Arab atau Indonesia
+- 📚 **Jelajahi Koleksi**: Telusuri hadits dari berbagai kitab hadits terkenal
+- 🔄 **Auto-Retry**: Sistem otomatis mencari hadits yang tersedia jika terjadi error
+- 📱 **Responsive Design**: Interface yang optimal di desktop dan mobile
+- 📝 **Changelog**: Tracking perubahan dan update aplikasi
+- 📋 **Copy & Share**: Mudah menyalin dan membagikan hadits
 
-There are several ways of editing your application.
+## 🛠️ Teknologi
 
-**Use Lovable**
+- **Frontend**: React 18 dengan TypeScript
+- **Build Tool**: Vite untuk development yang cepat
+- **Styling**: Tailwind CSS untuk desain modern
+- **UI Components**: shadcn/ui untuk komponen yang konsisten
+- **State Management**: React Hooks
+- **API**: Hadith API oleh Sutan Gading Fadhillah Nasution
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/cecbe778-5819-4631-8fad-1b7477e9e2a9) and start prompting.
+## 🚀 Instalasi dan Development
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prasyarat
+- Node.js (versi 18 atau lebih baru)
+- npm atau pnpm
 
-**Use your preferred IDE**
+### Langkah Instalasi
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. Clone repository:
+```bash
+git clone https://github.com/your-username/radiant-hadith.git
+cd radiant-hadith
 ```
 
-**Edit a file directly in GitHub**
+2. Install dependencies:
+```bash
+npm install
+# atau
+pnpm install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Jalankan development server:
+```bash
+npm run dev
+# atau
+pnpm dev
+```
 
-**Use GitHub Codespaces**
+4. Buka browser dan akses `http://localhost:5173`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Build untuk Production
 
-## What technologies are used for this project?
+```bash
+npm run build
+# atau
+pnpm build
+```
 
-This project is built with:
+## 🌐 Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Aplikasi ini di-deploy menggunakan Netlify dengan konfigurasi:
+- **Build Command**: `npm run build`
+- **Publish Directory**: `dist`
+- **Redirects**: Konfigurasi SPA untuk React Router
 
-## How can I deploy this project?
+## 📸 Screenshot
 
-Simply open [Lovable](https://lovable.dev/projects/cecbe778-5819-4631-8fad-1b7477e9e2a9) and click on Share -> Publish.
+*Screenshot aplikasi akan ditambahkan di sini*
 
-## Can I connect a custom domain to my Lovable project?
+## 🤝 Kontributor
 
-Yes, you can!
+- **Developer**: [Your Name]
+- **Hadith API**: [Sutan Gading Fadhillah Nasution](https://github.com/sutanlab)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📄 Lisensi
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) untuk detail lengkap.
+
+MIT License memungkinkan Anda untuk:
+- ✅ Menggunakan kode secara komersial
+- ✅ Memodifikasi dan mendistribusikan
+- ✅ Menggunakan secara pribadi
+- ✅ Menyertakan dalam proyek lain
+
+Dengan syarat menyertakan copyright notice dan license notice.
+
+## 🙏 Acknowledgments
+
+- Terima kasih kepada Sutan Gading Fadhillah Nasution untuk Hadith API
+- Komunitas open source untuk tools dan libraries yang digunakan
+- Semua kontributor yang membantu pengembangan aplikasi ini
