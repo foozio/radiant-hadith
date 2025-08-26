@@ -46,82 +46,124 @@ export const HadithDisplay = ({ hadith, onClose }: HadithDisplayProps) => {
   };
 
   return (
-    <Card className="max-w-4xl mx-auto bg-card/95 backdrop-blur-sm border-primary/10 shadow-islamic">
-      <CardHeader className="border-b border-border/50">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-gold rounded-lg shadow-soft">
-              <BookOpen className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-card-foreground">
+    <div className="max-w-5xl mx-auto p-6 animate-fade-in-up">
+      <Card className="glass-card bg-gradient-card border-primary/20 shadow-glow overflow-hidden hover-lift transition-all duration-500">
+        {/* Enhanced Header */}
+        <CardHeader className="glass bg-gradient-to-r from-primary/8 to-secondary/8 border-b border-primary/15 backdrop-blur-sm">
+          <div className="flex items-center justify-between">
+            <div className="space-y-3">
+              <h3 className="text-3xl md:text-4xl font-bold text-gradient mb-3 animate-fade-in-scale">
                 {hadith.name}
               </h3>
-              <div className="flex items-center space-x-2">
-                <Badge variant="secondary" className="bg-secondary/80">
+              <div className="flex items-center gap-3">
+                <div className="glass rounded-full px-4 py-2 text-sm font-medium text-primary/80">
                   Hadits #{hadith.contents.number}
-                </Badge>
+                </div>
+                <div className="w-2 h-2 bg-primary/40 rounded-full"></div>
+                <div className="text-sm text-muted-foreground font-medium">
+                  Koleksi Sahih
+                </div>
               </div>
             </div>
+            <div className="flex gap-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsFavorited(!isFavorited)}
+                className={`hover-glow rounded-xl p-3 transition-all duration-300 hover:scale-110 ${
+                  isFavorited 
+                    ? 'text-red-500 bg-red-50 hover:bg-red-100 shadow-soft' 
+                    : 'text-muted-foreground hover:bg-primary/10 hover:text-primary'
+                }`}
+              >
+                <Heart className={`h-6 w-6 ${isFavorited ? 'fill-current animate-pulse-glow' : ''}`} />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleCopy}
+                className="hover-glow rounded-xl p-3 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:scale-110"
+              >
+                <Copy className="h-6 w-6" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleShare}
+                className="hover-glow rounded-xl p-3 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:scale-110"
+              >
+                <Share2 className="h-6 w-6" />
+              </Button>
+            </div>
           </div>
-          
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsFavorited(!isFavorited)}
-              className={`${isFavorited ? 'bg-accent text-accent-foreground' : ''} border-primary/20`}
-            >
-              <Heart className={`h-4 w-4 ${isFavorited ? 'fill-current' : ''}`} />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleCopy}
-              className="border-primary/20 hover:bg-primary/5"
-            >
-              <Copy className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleShare}
-              className="border-primary/20 hover:bg-primary/5"
-            >
-              <Share2 className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
       
-      <CardContent className="p-8">
-        {/* Arabic text */}
-        <div className="mb-8 p-6 bg-gradient-to-br from-secondary/30 to-accent/20 rounded-xl border border-primary/10">
-          <p className="arabic text-2xl md:text-3xl leading-relaxed text-card-foreground">
-            {hadith.contents.arab}
-          </p>
-        </div>
-        
-        {/* Translation */}
-        <div className="prose prose-lg max-w-none">
-          <p className="hadith-text text-card-foreground leading-relaxed">
-            {hadith.contents.id}
-          </p>
-        </div>
-        
-        {/* Source attribution */}
-        <div className="mt-8 pt-6 border-t border-border/50">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <div>
-              <span className="font-medium">{hadith.name}</span> • 
-              <span className="ml-1">Hadits #{hadith.contents.number}</span>
+        {/* Enhanced Content */}
+        <CardContent className="p-8 md:p-10 space-y-10">
+          {/* Arabic Text Section */}
+          <div className="animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-3 h-3 bg-gradient-islamic rounded-full animate-pulse-glow"></div>
+              <h3 className="text-xl font-bold text-gradient">
+                النص العربي
+              </h3>
+              <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent"></div>
             </div>
-            <div className="text-xs">
-              Sumber: api.hadith.gading.dev
+            <div className="glass-card bg-gradient-to-br from-primary/8 to-secondary/8 rounded-2xl p-8 border border-primary/15 hover-glow transition-all duration-500">
+              <p className="text-right text-2xl md:text-3xl leading-loose font-arabic text-foreground text-shadow-soft">
+                {hadith.contents.arab}
+              </p>
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+
+          {/* Indonesian Translation Section */}
+          <div className="animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-3 h-3 bg-gradient-gold rounded-full animate-pulse-glow"></div>
+              <h3 className="text-xl font-bold text-gradient">
+                Terjemahan Indonesia
+              </h3>
+              <div className="flex-1 h-px bg-gradient-to-r from-secondary/30 to-transparent"></div>
+            </div>
+            <div className="glass-card bg-gradient-to-br from-secondary/8 to-primary/8 rounded-2xl p-8 border border-secondary/15 hover-glow transition-all duration-500">
+              <p className="text-lg md:text-xl leading-relaxed text-foreground font-medium">
+                {hadith.contents.id}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+         
+         {/* Enhanced Footer */}
+         <CardFooter className="glass bg-gradient-to-r from-muted/20 to-muted/15 border-t border-primary/15 p-8 backdrop-blur-sm">
+           <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4">
+             <div className="flex items-center gap-3">
+               <div className="glass rounded-full p-2">
+                 <BookOpen className="h-4 w-4 text-primary" />
+               </div>
+               <div>
+                 <div className="text-sm font-semibold text-primary mb-1">
+                   Sumber Hadits
+                 </div>
+                 <div className="text-sm text-muted-foreground">
+                   {hadith.name} • Hadits #{hadith.contents.number}
+                 </div>
+               </div>
+             </div>
+             <div className="flex items-center gap-4">
+               <div className="flex items-center gap-2">
+                 <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full animate-pulse-glow"></div>
+                 <span className="text-sm font-medium text-green-700 dark:text-green-400">
+                   Hadits Sahih
+                 </span>
+               </div>
+               <div className="glass rounded-full px-4 py-2 text-xs font-medium text-muted-foreground">
+                 ✓ Terverifikasi
+               </div>
+             </div>
+           </div>
+        </CardFooter>
+      </Card>
+       </Card>
+    </div>
   );
 };

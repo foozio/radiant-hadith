@@ -9,8 +9,8 @@ All colors MUST be HSL.
 /* KFGQPC Uthman Taha Naskh Font - Beautiful Naskh calligraphy for hadith text */
 @font-face {
   font-family: 'KFGQPC-Uthman-Taha-Naskh';
-  src: url('./assets/fonts/KFGQPC-Uthman-Taha-Naskh.woff') format('woff'),
-       url('./assets/fonts/KFGQPC-Uthman-Taha-Naskh.ttf') format('truetype');
+  src: url('/src/assets/fonts/KFGQPC-Uthman-Taha-Naskh.woff') format('woff'),
+       url('/src/assets/fonts/KFGQPC-Uthman-Taha-Naskh.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -112,42 +112,248 @@ All colors MUST be HSL.
 @layer base {
   /* Custom design tokens for Islamic app */
   :root {
-    /* Gradients */
-    --gradient-islamic: linear-gradient(135deg, hsl(var(--primary)), hsl(155 45% 35%));
-    --gradient-gold: linear-gradient(135deg, hsl(45 90% 75%), hsl(45 85% 85%));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(155 45% 35%), hsl(45 60% 45%));
+    /* Enhanced Gradients */
+    --gradient-islamic: linear-gradient(135deg, hsl(var(--primary)), hsl(155 45% 35%), hsl(155 55% 25%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 90% 75%), hsl(45 85% 85%), hsl(45 80% 90%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(155 45% 35%), hsl(45 60% 45%), hsl(155 35% 45%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--card)) 50%, hsl(var(--muted)) 100%);
+    --gradient-glass: linear-gradient(145deg, hsl(var(--background) / 0.8), hsl(var(--background) / 0.4));
+    --gradient-shimmer: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
     
-    /* Shadows */
-    --shadow-islamic: 0 8px 32px -4px hsl(var(--primary) / 0.2);
-    --shadow-gold: 0 4px 20px -2px hsl(45 70% 50% / 0.3);
-    --shadow-soft: 0 2px 8px -1px hsl(var(--foreground) / 0.1);
+    /* Enhanced Shadows */
+    --shadow-islamic: 0 8px 32px -4px hsl(var(--primary) / 0.2), 0 0 0 1px hsl(var(--primary) / 0.05);
+    --shadow-gold: 0 4px 20px -2px hsl(45 70% 50% / 0.3), 0 0 0 1px hsl(45 70% 50% / 0.1);
+    --shadow-soft: 0 2px 8px -1px hsl(var(--foreground) / 0.1), 0 0 0 1px hsl(var(--border));
+    --shadow-glass: 0 8px 32px -8px hsl(var(--foreground) / 0.1), 0 0 0 1px hsl(var(--border) / 0.5);
+    --shadow-hover: 0 12px 40px -8px hsl(var(--primary) / 0.25), 0 0 0 1px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.3);
     
-    /* Typography */
+    /* Enhanced Typography & Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Glass Morphism */
+    --glass-bg: hsl(var(--background) / 0.8);
+    --glass-border: hsl(var(--border) / 0.2);
+    --glass-backdrop: blur(12px) saturate(180%);
   }
 
-  /* Base styles */
+  /* Enhanced Base styles */
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground font-serif;
+    scroll-behavior: smooth;
   }
   
-  /* Arabic text styling with KFGQPC Uthman Taha Naskh */
+  /* Enhanced Arabic text styling with KFGQPC Uthman Taha Naskh */
   .arabic {
     font-family: 'KFGQPC-Uthman-Taha-Naskh', 'Amiri', 'Times New Roman', serif;
     direction: rtl;
     text-align: right;
-    line-height: 2.4;
+    line-height: 2.6;
     font-size: 1.5rem;
     font-weight: normal;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px hsl(var(--foreground) / 0.1);
   }
   
-  /* Hadith content styling */
+  /* Enhanced Hadith content styling */
   .hadith-text {
-    line-height: 1.8;
+    line-height: 1.9;
     font-size: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+  
+  /* Glass Morphism Effects */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .glass-card {
+    background: linear-gradient(145deg, hsl(var(--card) / 0.9), hsl(var(--card) / 0.7));
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+  
+  /* Enhanced Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Animation Classes */
+  .animate-fade-in {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  .animate-fade-in-scale {
+    animation: fadeInScale 0.5s ease-out;
+  }
+  
+  .animate-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animate-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-shimmer);
+    animation: shimmer 2s infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .hover-glow {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .hover-scale {
+    transition: var(--transition-bounce);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Background Gradient Classes */
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .bg-gradient-islamic {
+    background: var(--gradient-islamic);
+  }
+  
+  .bg-gradient-gold {
+    background: var(--gradient-gold);
+  }
+  
+  /* Shadow Classes */
+  .shadow-glass {
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Enhanced Typography */
+  .text-gradient {
+    background: var(--gradient-islamic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-shadow-soft {
+    text-shadow: 0 2px 4px hsl(var(--foreground) / 0.1);
+  }
+  
+  /* Enhanced Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-islamic);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
   }
 }

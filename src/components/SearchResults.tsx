@@ -84,196 +84,323 @@ export const SearchResults = ({
   const currentResults = searchResults.slice(startIndex, endIndex);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8">
+    <div className="max-w-7xl mx-auto px-6 py-8 animate-fade-in">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/3 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-secondary/5 rounded-full blur-2xl animate-float" style={{animationDelay: '2s'}}></div>
+      </div>
+      
       {/* Search Header */}
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-foreground mb-4">
-          Hasil Pencarian
-        </h2>
+      <div className="mb-10 relative z-10">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold text-gradient mb-3 animate-fade-in-up">
+            نتائج البحث
+          </h2>
+          <h3 className="text-2xl font-semibold text-foreground/90 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            Hasil Pencarian
+          </h3>
+          <div className="w-24 h-1 bg-gradient-islamic mx-auto mt-4 rounded-full animate-scale" style={{animationDelay: '0.4s'}}></div>
+        </div>
         
-        {/* Search Form */}
-        <form onSubmit={handleSearch} className="mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                type="text"
-                placeholder="Cari hadits, kata kunci, atau topik..."
-                value={localQuery}
-                onChange={(e) => setLocalQuery(e.target.value)}
-                className="pl-10 h-12"
-              />
+        {/* Enhanced Search Form */}
+        <form onSubmit={handleSearch} className="mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-4xl mx-auto">
+            <div className="relative flex-1 group">
+              <div className="absolute inset-0 bg-gradient-islamic rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+              <div className="relative glass-card bg-background/80 rounded-2xl p-1">
+                <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
+                <Input
+                  type="text"
+                  placeholder="ابحث عن الأحاديث والكلمات المفتاحية..."
+                  value={localQuery}
+                  onChange={(e) => setLocalQuery(e.target.value)}
+                  className="pl-14 pr-6 h-14 text-lg bg-transparent border-none shadow-none focus:ring-0 focus:outline-none placeholder:text-muted-foreground font-medium"
+                />
+              </div>
             </div>
-            <Button type="submit" className="h-12 px-8">
-              <Search className="mr-2 h-4 w-4" />
-              Cari
+            <Button type="submit" className="h-16 px-10 bg-gradient-islamic hover:shadow-glow text-primary-foreground rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-islamic">
+              <Search className="mr-3 h-5 w-5" />
+              بحث
             </Button>
           </div>
         </form>
 
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium text-muted-foreground">Filter berdasarkan koleksi:</span>
+        {/* Enhanced Filters */}
+        <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-center">
+          <div className="glass rounded-2xl p-4 bg-background/60 backdrop-blur-sm border border-primary/10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-gradient-islamic rounded-lg">
+                <Filter className="h-4 w-4 text-primary-foreground" />
+              </div>
+              <span className="text-sm font-semibold text-foreground">تصفية حسب المجموعة</span>
+            </div>
+            <Select
+              value={selectedBook || "all"}
+              onValueChange={(value) => onFilterByBook(value === "all" ? null : value)}
+            >
+              <SelectTrigger className="w-[250px] h-12 glass-card bg-background/80 border-primary/20 rounded-xl font-medium">
+                <SelectValue placeholder="جميع المجموعات" />
+              </SelectTrigger>
+              <SelectContent className="glass-card bg-background/95 backdrop-blur-md border-primary/20">
+                <SelectItem value="all" className="font-medium">جميع المجموعات</SelectItem>
+                {books.map((book) => (
+                  <SelectItem key={book.id} value={book.id} className="font-medium">
+                    {book.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <Select
-            value={selectedBook || "all"}
-            onValueChange={(value) => onFilterByBook(value === "all" ? null : value)}
-          >
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Semua koleksi" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Semua koleksi</SelectItem>
-              {books.map((book) => (
-                <SelectItem key={book.id} value={book.id}>
-                  {book.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
       </div>
 
-      {/* Results Info */}
+      {/* Enhanced Results Info */}
       {!loading && (
-        <div className="mb-6">
-          <p className="text-muted-foreground">
-            {searchResults.length > 0 ? (
-              <>
-                Menampilkan {startIndex + 1}-{endIndex} dari {searchResults.length} hasil untuk 
-                <span className="font-semibold text-foreground">"{searchQuery}"</span>
-                {selectedBook && (
-                  <>
-                    {" "} dalam{" "}
-                    <Badge variant="secondary" className="ml-1">
-                      {books.find(b => b.id === selectedBook)?.name}
-                    </Badge>
-                  </>
-                )}
-              </>
-            ) : searchQuery ? (
-              <>Tidak ada hasil ditemukan untuk <span className="font-semibold text-foreground">"{searchQuery}"</span></>
-            ) : (
-              "Masukkan kata kunci untuk mencari hadits"
-            )}
-          </p>
+        <div className="mb-8">
+          <div className="glass-card bg-background/60 rounded-2xl p-6 border border-primary/10 animate-fade-in-up">
+            <div className="text-center">
+              {searchResults.length > 0 ? (
+                <div className="space-y-2">
+                  <p className="text-lg font-semibold text-foreground">
+                    عرض {startIndex + 1}-{endIndex} من {searchResults.length} نتيجة
+                  </p>
+                  <p className="text-muted-foreground">
+                    Menampilkan hasil untuk{" "}
+                    <span className="font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      "{searchQuery}"
+                    </span>
+                    {selectedBook && (
+                      <>
+                        {" "} dalam{" "}
+                        <Badge variant="secondary" className="glass bg-secondary/20 text-secondary-foreground font-semibold px-3 py-1">
+                          {books.find(b => b.id === selectedBook)?.name}
+                        </Badge>
+                      </>
+                    )}
+                  </p>
+                </div>
+              ) : searchQuery ? (
+                <div className="space-y-2">
+                  <p className="text-lg font-semibold text-muted-foreground">لا توجد نتائج</p>
+                  <p className="text-muted-foreground">
+                    Tidak ada hasil ditemukan untuk{" "}
+                    <span className="font-semibold text-foreground">"{searchQuery}"</span>
+                  </p>
+                </div>
+              ) : (
+                <p className="text-muted-foreground font-medium">
+                  أدخل كلمة مفتاحية للبحث عن الأحاديث
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Loading State */}
+      {/* Enhanced Loading State */}
       {loading && (
-        <div className="flex justify-center items-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <span className="ml-2 text-lg text-muted-foreground">Mencari hadits...</span>
+        <div className="flex flex-col justify-center items-center py-16">
+          <div className="relative">
+            <div className="glass-card bg-background/80 rounded-3xl p-8 shadow-glow">
+              <div className="flex flex-col items-center space-y-4">
+                <div className="relative">
+                  <Loader2 className="h-12 w-12 animate-spin text-primary" />
+                  <div className="absolute inset-0 h-12 w-12 border-2 border-primary/20 rounded-full animate-pulse"></div>
+                </div>
+                <div className="text-center space-y-2">
+                  <p className="text-xl font-semibold text-primary animate-pulse-glow">جاري البحث...</p>
+                  <p className="text-muted-foreground font-medium">Mencari hadits dalam koleksi</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Error State */}
+      {/* Enhanced Error State */}
       {error && (
-        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6 mb-6">
-          <p className="text-destructive font-medium">Terjadi kesalahan saat mencari:</p>
-          <p className="text-destructive/80 mt-1">{error}</p>
+        <div className="glass-card bg-destructive/5 border border-destructive/20 rounded-2xl p-8 mb-8 animate-fade-in">
+          <div className="text-center space-y-3">
+            <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto">
+              <Search className="h-8 w-8 text-destructive" />
+            </div>
+            <div>
+              <p className="text-destructive font-bold text-lg">خطأ في البحث</p>
+              <p className="text-destructive/80 mt-2 font-medium">{error}</p>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Search Results */}
+      {/* Enhanced Search Results */}
       {!loading && !error && currentResults.length > 0 && (
-        <div className="space-y-6">
+        <div className="space-y-8 relative z-10">
           {currentResults.map((hadith, index) => (
-            <Card key={`${hadith.id}-${hadith.contents.number}`} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => onSelectHadith(hadith)}>
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="font-semibold text-lg text-foreground mb-1">
-                      {hadith.name} - Hadits #{hadith.contents.number}
-                    </h3>
-                    <Badge variant="outline" className="text-xs">
-                      {hadith.id}
-                    </Badge>
+            <Card 
+              key={`${hadith.id}-${hadith.contents.number}`} 
+              className="group glass-card bg-gradient-card border-primary/20 shadow-glass hover:shadow-glow cursor-pointer hover-lift transition-all duration-500 overflow-hidden animate-fade-in-scale" 
+              style={{animationDelay: `${index * 0.1}s`}}
+              onClick={() => onSelectHadith(hadith)}
+            >
+              {/* Decorative elements */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute top-4 right-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl"></div>
+                <div className="absolute bottom-4 left-4 w-16 h-16 bg-secondary/8 rounded-full blur-xl"></div>
+              </div>
+              
+              <CardContent className="p-8 relative z-10">
+                {/* Header */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-8 bg-gradient-islamic rounded-full"></div>
+                      <h3 className="font-bold text-xl text-gradient group-hover:scale-105 transition-transform duration-300">
+                        {hadith.name}
+                      </h3>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Badge variant="outline" className="glass bg-primary/10 text-primary border-primary/30 font-semibold px-3 py-1">
+                        حديث #{hadith.contents.number}
+                      </Badge>
+                      <Badge variant="outline" className="glass bg-secondary/10 text-secondary-foreground border-secondary/30 font-medium px-3 py-1">
+                        {hadith.id}
+                      </Badge>
+                    </div>
+                  </div>
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-12 h-12 bg-gradient-islamic rounded-full flex items-center justify-center shadow-glow">
+                      <Search className="h-5 w-5 text-primary-foreground" />
+                    </div>
                   </div>
                 </div>
                 
                 {/* Arabic Text */}
-                <div className="mb-4">
-                  <p className="text-right text-xl leading-relaxed font-arabic text-foreground" dir="rtl">
-                    {highlightText(hadith.contents.arab, searchQuery)}
-                  </p>
+                <div className="mb-6">
+                  <div className="glass rounded-2xl p-6 bg-background/40 border border-primary/10">
+                    <p className="text-right text-2xl leading-relaxed font-arabic text-foreground text-shadow-soft" dir="rtl">
+                      {highlightText(hadith.contents.arab, searchQuery)}
+                    </p>
+                  </div>
                 </div>
                 
-                {/* English Translation (if available) */}
+                {/* Translation */}
                 {hadith.contents.id && (
-                  <div className="border-t pt-4">
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                  <div className="glass rounded-2xl p-6 bg-background/30 border border-primary/5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-1 h-4 bg-gradient-gold rounded-full"></div>
+                      <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Terjemahan</span>
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed font-medium">
                       {highlightText(hadith.contents.id, searchQuery)}
                     </p>
                   </div>
                 )}
+                
+                {/* Footer indicator */}
+                <div className="flex justify-center mt-6">
+                  <div className="w-8 h-1 bg-gradient-islamic rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
       )}
 
-      {/* Pagination */}
+      {/* Enhanced Pagination */}
       {!loading && !error && searchResults.length > ITEMS_PER_PAGE && (
-        <div className="flex justify-center items-center gap-4 mt-8">
-          <Button
-            variant="outline"
-            onClick={() => onPageChange(currentPage - 1)}
-            disabled={currentPage <= 1}
-            className="flex items-center gap-2"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Sebelumnya
-          </Button>
-          
-          <div className="flex items-center gap-2">
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              const pageNum = Math.max(1, Math.min(totalPages - 4, currentPage - 2)) + i;
-              if (pageNum > totalPages) return null;
+        <div className="flex justify-center items-center gap-6 mt-12">
+          <div className="glass-card bg-background/60 rounded-2xl p-4 border border-primary/10">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="outline"
+                onClick={() => onPageChange(currentPage - 1)}
+                disabled={currentPage <= 1}
+                className="glass-card bg-background/80 border-primary/20 hover:shadow-glow disabled:opacity-50 disabled:cursor-not-allowed h-12 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+              >
+                <ChevronLeft className="h-5 w-5 mr-2" />
+                السابق
+              </Button>
               
-              return (
-                <Button
-                  key={pageNum}
-                  variant={pageNum === currentPage ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => onPageChange(pageNum)}
-                  className="w-10 h-10"
-                >
-                  {pageNum}
-                </Button>
-              );
-            })}
+              <div className="flex items-center gap-2">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  const pageNum = Math.max(1, Math.min(totalPages - 4, currentPage - 2)) + i;
+                  if (pageNum > totalPages) return null;
+                  
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant={pageNum === currentPage ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => onPageChange(pageNum)}
+                      className={`w-12 h-12 rounded-xl font-bold transition-all duration-300 ${
+                        pageNum === currentPage 
+                          ? 'bg-gradient-islamic text-primary-foreground shadow-glow scale-110' 
+                          : 'glass-card bg-background/80 border-primary/20 hover:shadow-soft hover:scale-105'
+                      }`}
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })}
+              </div>
+              
+              <Button
+                variant="outline"
+                onClick={() => onPageChange(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                className="glass-card bg-background/80 border-primary/20 hover:shadow-glow disabled:opacity-50 disabled:cursor-not-allowed h-12 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+              >
+                التالي
+                <ChevronRight className="h-5 w-5 ml-2" />
+              </Button>
+            </div>
           </div>
-          
-          <Button
-            variant="outline"
-            onClick={() => onPageChange(currentPage + 1)}
-            disabled={currentPage >= totalPages}
-            className="flex items-center gap-2"
-          >
-            Selanjutnya
-            <ChevronRight className="h-4 w-4" />
-          </Button>
         </div>
       )}
 
-      {/* Empty State */}
+      {/* Enhanced Empty State */}
       {!loading && !error && searchResults.length === 0 && searchQuery && (
-        <div className="text-center py-12">
-          <div className="max-w-md mx-auto">
-            <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-foreground mb-2">
-              No results found
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Try adjusting your search terms or browse through the collections to find what you're looking for.
-            </p>
-            <Button onClick={() => onFilterByBook(null)} variant="outline">
-              Clear filters
-            </Button>
+        <div className="text-center py-16">
+          <div className="max-w-lg mx-auto">
+            <div className="glass-card bg-background/60 rounded-3xl p-12 border border-primary/10 animate-fade-in">
+              <div className="space-y-6">
+                <div className="relative">
+                  <div className="w-24 h-24 bg-gradient-islamic/10 rounded-full flex items-center justify-center mx-auto">
+                    <Search className="h-12 w-12 text-primary/80" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse-glow"></div>
+                </div>
+                
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold text-gradient">
+                    لا توجد نتائج
+                  </h3>
+                  <h4 className="text-xl font-semibold text-foreground">
+                    Tidak ada hasil ditemukan
+                  </h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Coba sesuaikan kata kunci pencarian atau jelajahi koleksi hadits untuk menemukan yang Anda cari.
+                  </p>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    onClick={() => onFilterByBook(null)} 
+                    variant="outline"
+                    className="glass-card bg-background/80 border-primary/20 hover:shadow-glow h-12 px-8 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+                  >
+                    مسح المرشحات
+                  </Button>
+                  <Button 
+                    onClick={() => setLocalQuery('')}
+                    className="bg-gradient-islamic hover:shadow-glow text-primary-foreground h-12 px-8 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+                  >
+                    بحث جديد
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

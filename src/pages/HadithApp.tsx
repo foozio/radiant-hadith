@@ -5,6 +5,7 @@ import { HadithHero } from "@/components/HadithHero";
 import { HadithBook } from "@/components/HadithBook";
 import { HadithDisplay } from "@/components/HadithDisplay";
 import { SearchResults } from "@/components/SearchResults";
+import { BookCollectionSkeleton, HadithDisplaySkeleton, IslamicLoader } from "@/components/skeletons/LoadingSkeletons";
 import { useHadithBooks, useHadith } from "@/hooks/useHadithAPI";
 import { useHadithSearch } from "@/hooks/useHadithSearch";
 import { useToast } from "@/hooks/use-toast";
@@ -127,10 +128,7 @@ export const HadithApp = () => {
               </div>
 
               {booksLoading ? (
-                <div className="flex justify-center items-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <span className="ml-2 text-lg text-muted-foreground">Loading collections...</span>
-                </div>
+                <BookCollectionSkeleton />
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {books.map((book) => (
@@ -150,10 +148,10 @@ export const HadithApp = () => {
           <section className="py-12 px-6">
             <div className="max-w-7xl mx-auto">
               {hadithLoading ? (
-                <div className="flex justify-center items-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <span className="ml-2 text-lg text-muted-foreground">Mencari hadith yang tersedia...</span>
-                </div>
+                <IslamicLoader 
+                  message="Mencari hadith yang tersedia..." 
+                  arabicMessage="جاري البحث عن الحديث..."
+                />
               ) : (
                 <HadithDisplay hadith={selectedHadith} />
               )}
