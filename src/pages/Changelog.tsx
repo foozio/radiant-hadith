@@ -16,26 +16,6 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
-    version: "1.0.3",
-    date: new Date().toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }),
-    changes: {
-      fixed: [
-        "Memperbaiki masalah keterbacaan teks dengan meningkatkan kontras warna",
-        "Menguatkan warna teks muted dan placeholder untuk visibilitas yang lebih baik",
-        "Menyesuaikan opacity dan text shadow untuk aksesibilitas yang lebih baik"
-      ],
-      changed: [
-        "Mengubah teks Arab dari 'موثوق' menjadi 'صَحِيْح' di komponen HadithBook dan HadithHero",
-        "Mengubah warna teks '9 koleksi hadits sahih tersedia' menjadi hijau gelap untuk mencocokkan tombol 'Jelajahi Koleksi'",
-        "Memperbarui judul 'Penjelajah Hadits' untuk menggunakan warna putih yang konsisten"
-      ]
-    }
-  },
-  {
     version: "1.3.4",
     date: new Date().toLocaleDateString('id-ID', {
       year: 'numeric',
@@ -161,6 +141,26 @@ const changelogData: ChangelogEntry[] = [
         "Memperbaiki masalah paginasi dalam penjelajahan hadits",
         "Mengatasi memory leak dalam fungsi pencarian",
         "Memperbaiki masalah desain responsif pada perangkat mobile"
+      ]
+    }
+  },
+  {
+    version: "1.0.3",
+    date: new Date().toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+    changes: {
+      fixed: [
+        "Memperbaiki masalah keterbacaan teks dengan meningkatkan kontras warna",
+        "Menguatkan warna teks muted dan placeholder untuk visibilitas yang lebih baik",
+        "Menyesuaikan opacity dan text shadow untuk aksesibilitas yang lebih baik"
+      ],
+      changed: [
+        "Mengubah teks Arab dari 'موثوق' menjadi 'صَحِيْح' di komponen HadithBook dan HadithHero",
+        "Mengubah warna teks '9 koleksi hadits sahih tersedia' menjadi hijau gelap untuk mencocokkan tombol 'Jelajahi Koleksi'",
+        "Memperbarui judul 'Penjelajah Hadits' untuk menggunakan warna putih yang konsisten"
       ]
     }
   },

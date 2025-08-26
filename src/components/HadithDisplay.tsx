@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BookOpen, Copy, Share2, Heart } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -163,7 +163,6 @@ export const HadithDisplay = ({ hadith, onClose }: HadithDisplayProps) => {
            </div>
         </CardFooter>
       </Card>
-       </Card>
     </div>
   );
 };
